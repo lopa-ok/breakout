@@ -4,21 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakout Game</title>
-    <style>
-        body {
-            margin: 0;
-            background: #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        canvas {
-            background: #000;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="info">
+        <span class="score">Score: 0</span>
+        <span class="lives">Lives: 3</span>
+    </div>
     <canvas id="breakoutCanvas" width="800" height="600"></canvas>
     <script src="breakout.js"></script>
 </body>
