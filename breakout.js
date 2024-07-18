@@ -97,8 +97,10 @@ function collisionDetection() {
                 if (x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
                     dy = -dy;
                     brick.status = 0;
-                    if (brick.type === 'powerup') {
-                        activatePowerup();
+                    if (brick.type === 'paddlePowerup') {
+                        activatePaddlePowerup();
+                    } else if (brick.type === 'lifePowerup') {
+                        gainLife();
                     }
                     score++;
                     document.querySelector('.score').textContent = 'Score: ' + score;
@@ -114,10 +116,15 @@ function collisionDetection() {
     }
 }
 
-function activatePowerup() {
+function activatePaddlePowerup() {
     paddleWidth = originalPaddleWidth * 2; // Double the paddle width
     powerupActive = true;
     powerupEndTime = Date.now() + powerupDuration; // Set the end time of the power-up
+}
+
+function gainLife() {
+    lives++;
+    document.querySelector('.lives').textContent = 'Lives: ' + lives;
 }
 
 function checkPowerupDuration() {
@@ -131,13 +138,16 @@ function generateBricks() {
     for (let c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
         for (let r = 0; r < brickRowCount; r++) {
-            // Determine if it's a regular brick or a power-up brick
+            // Determine if it's a regular brick, a paddle power-up brick, or a life power-up brick
             let brickType = 'regular';
             let brickColor = '#0095DD'; // Regular brick color
 
-            if (Math.random() < 0.1) { // 10% chance for a power-up brick
-                brickType = 'powerup';
-                brickColor = '#ff0000'; // Power-up brick color
+            if (Math.random() < 0.1) { // 10% chance for a paddle power-up brick
+                brickType = 'paddlePowerup';
+                brickColor = '#ff0000'; // Paddle power-up brick color
+            } else if (Math.random() < 0.001) { // 1% chance for a life power-up brick
+                brickType = 'lifePowerup';
+                brickColor = '#00ff00'; // Life power-up brick color
             }
 
             bricks[c][r] = {
