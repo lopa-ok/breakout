@@ -145,7 +145,7 @@ function generateBricks() {
             if (Math.random() < 0.1) { // 10% chance for a paddle power-up brick
                 brickType = 'paddlePowerup';
                 brickColor = '#ff0000'; // Paddle power-up brick color
-            } else if (Math.random() < 0.001) { // 1% chance for a life power-up brick
+            } else if (Math.random() < 0.05) { // 5% chance for a life power-up brick
                 brickType = 'lifePowerup';
                 brickColor = '#00ff00'; // Life power-up brick color
             }
@@ -168,6 +168,27 @@ function resetBallAndPaddle() {
     dy = -4; // Reset speed
     paddleWidth = originalPaddleWidth; // Reset paddle width to original
     paddleX = (canvas.width - paddleWidth) / 2;
+}
+
+function showGameOverScreen() {
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('gameOverScreen').style.display = 'block';
+}
+
+function hideGameOverScreen() {
+    document.getElementById('gameOverScreen').style.display = 'none';
+}
+
+function restartGame() {
+    score = 0;
+    lives = 3;
+    level = 1;
+    document.querySelector('.score').textContent = 'Score: ' + score;
+    document.querySelector('.lives').textContent = 'Lives: ' + lives;
+    hideGameOverScreen();
+    generateBricks();
+    resetBallAndPaddle();
+    draw();
 }
 
 function draw() {
@@ -195,8 +216,8 @@ function draw() {
             lives--;
             document.querySelector('.lives').textContent = 'Lives: ' + lives;
             if (!lives) {
-                alert('GAME OVER');
-                document.location.reload();
+                showGameOverScreen();
+                return; // Stop the draw loop
             } else {
                 resetBallAndPaddle();
             }

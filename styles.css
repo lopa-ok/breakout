@@ -43,3 +43,39 @@ canvas {
 .paddle {
     background-color: #DD0095;
 }
+.game-over-screen {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.game-over-screen h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.game-over-screen p {
+    font-size: 18px;
+}
+
+.game-over-screen button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 10px 20px;
+    background-color: #DD0095;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.game-over-screen button:hover {
+    background-color: #BB0075;
+}
